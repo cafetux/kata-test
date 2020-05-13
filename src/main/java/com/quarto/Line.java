@@ -16,7 +16,7 @@ public class Line {
     }
 
     public boolean allPawnAreSame() {
-        return !pawns.isEmpty() &&
+        return pawns.size() == 4 &&
                 (pawns.stream().allMatch(Pawn::isSmall) || pawns.stream().noneMatch(Pawn::isSmall));
     }
 }
