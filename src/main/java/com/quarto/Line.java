@@ -1,11 +1,20 @@
 package com.quarto;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class Line {
-    public Line() {}
 
-    public Line(ArrayList<Pawn> pawns) {
+    private final int size;
 
+    public Line() {
+        this.size=0;
+    }
+
+    public Line(List<Pawn> pawns) {
+        this.size = pawns.size();
+    }
+
+    public int size() {
+        return size;
     }
 }
