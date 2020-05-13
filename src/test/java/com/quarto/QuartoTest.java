@@ -36,6 +36,17 @@ public class QuartoTest {
         assertThat( checkIfGameIsWon( new Line(pawns) ) ).isFalse();
     }
 
+    @Test
+    public void should_win_when_four_pawns_are_tall () {
+        List<Pawn> pawns = new ArrayList<Pawn>();
+        pawns.add(tallPawn());
+        pawns.add(tallPawn());
+        pawns.add(tallPawn());
+        pawns.add(tallPawn());
+        assertThat( checkIfGameIsWon( new Line(pawns) ) ).isTrue();
+
+    }
+
     private Pawn tallPawn() {
         return new Pawn(false);
     }
@@ -46,8 +57,7 @@ public class QuartoTest {
 
 
     public boolean checkIfGameIsWon(Line line) {
-
-        return line.size() == 4;
+        return line.allPawnAreSame();
     }
 
 }
