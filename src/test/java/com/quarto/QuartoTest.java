@@ -5,6 +5,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class QuartoTest {
@@ -18,33 +19,36 @@ public class QuartoTest {
 
     @Test
     public void should_win_when_four_pawns_are_small() {
-        List<Pawn> pawns = new ArrayList<Pawn>();
-        pawns.add(smallPawn());
-        pawns.add(smallPawn());
-        pawns.add(smallPawn());
-        pawns.add(smallPawn());
-        assertThat( checkIfGameIsWon( new Line(pawns) ) ).isTrue();
+        Line line = given_a_line(smallPawn(), smallPawn(), smallPawn(), smallPawn());
+        assertThat( checkIfGameIsWon( line ) ).isTrue();
     }
 
     @Test
     public void should_not_win_when_only_one_pawn_is_tall() {
-        List<Pawn> pawns = new ArrayList<Pawn>();
-        pawns.add(smallPawn());
-        pawns.add(smallPawn());
-        pawns.add(tallPawn());
-        pawns.add(smallPawn());
-        assertThat( checkIfGameIsWon( new Line(pawns) ) ).isFalse();
+        Line line = given_a_line(smallPawn(), smallPawn(), tallPawn(), smallPawn());
+        assertThat( checkIfGameIsWon(line) ).isFalse();
     }
 
     @Test
     public void should_win_when_four_pawns_are_tall () {
-        List<Pawn> pawns = new ArrayList<Pawn>();
-        pawns.add(tallPawn());
-        pawns.add(tallPawn());
-        pawns.add(tallPawn());
-        pawns.add(tallPawn());
-        assertThat( checkIfGameIsWon( new Line(pawns) ) ).isTrue();
+        Line line = given_a_line(tallPawn(), tallPawn(), tallPawn(), tallPawn());
+        assertThat( checkIfGameIsWon(line) ).isTrue();
 
+    }
+
+    @Test
+    public void should_not_win_when_all_pawns_are_tall_but_line_not_complete() {
+        Line line = given_a_line(tallPawn(), tallPawn(), tallPawn());
+        assertThat( checkIfGameIsWon(line) ).isFalse();
+
+    }
+
+    private Line given_a_line(Pawn pawn1, Pawn pawn2, Pawn pawn3) {
+        return new Line(asList(pawn1, pawn2, pawn3));
+    }
+
+    private Line given_a_line(Pawn pawn1, Pawn pawn2, Pawn pawn3, Pawn pawn4) {
+        return new Line(asList(pawn1, pawn2, pawn3, pawn4));
     }
 
     private Pawn tallPawn() {

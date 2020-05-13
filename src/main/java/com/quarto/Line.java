@@ -8,7 +8,7 @@ public class Line {
     private final List<Pawn> pawns;
 
     public Line() {
-        pawns = new ArrayList<Pawn>();
+        pawns = new ArrayList<>();
     }
 
     public Line(List<Pawn> pawns) {
@@ -16,6 +16,7 @@ public class Line {
     }
 
     public boolean allPawnAreSame() {
-        return pawns.isEmpty() ? false : pawns.get( 2 ).isSmall();
+        return !pawns.isEmpty() &&
+                (pawns.stream().allMatch(Pawn::isSmall) || pawns.stream().noneMatch(Pawn::isSmall));
     }
 }
