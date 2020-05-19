@@ -2,17 +2,10 @@ package com.quarto;
 
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class QuartoTest {
-
-
-    private Random random = new Random();
 
     @Test
     public void should_not_win_when_empty() {
@@ -49,6 +42,12 @@ public class QuartoTest {
         assertThat( checkIfGameIsWon( line ) ).isTrue();
     }
 
+    @Test
+    public void should_win_when_four_pawns_are_round() {
+        Line line = given_a_line( roundPawn(), roundPawn(), roundPawn(), roundPawn() );
+        assertThat( checkIfGameIsWon( line ) ).isTrue();
+    }
+
     private Line given_a_line(Pawn pawn1, Pawn pawn2, Pawn pawn3) {
         return new Line(asList(pawn1, pawn2, pawn3));
     }
@@ -57,16 +56,16 @@ public class QuartoTest {
         return new Line(asList(pawn1, pawn2, pawn3, pawn4));
     }
 
-    private Pawn squarePawn() {
-        return new Pawn( random.nextBoolean(), true );
-    }
+    private Pawn roundPawn() { return new Pawn( Property.ROUND ); }
+
+    private Pawn squarePawn() { return new Pawn( Property.SQUARE ); }
 
     private Pawn tallPawn() {
-        return new Pawn(false);
+        return new Pawn(Property.TALL);
     }
 
     private Pawn smallPawn() {
-        return new Pawn(true);
+        return new Pawn(Property.SMALL);
     }
 
 

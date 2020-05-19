@@ -17,6 +17,8 @@ public class Line {
 
     public boolean allPawnAreSame() {
         return pawns.size() == 4 &&
-                (pawns.stream().allMatch(Pawn::isSmall) || pawns.stream().noneMatch(Pawn::isSmall));
+                (pawns.stream().allMatch(Pawn::isSmall) || pawns.stream().allMatch(Pawn::isTall)
+                ||  pawns.stream().allMatch(Pawn::isSquare) || pawns.stream().allMatch(Pawn::isRound) );
     }
+
 }
