@@ -21,4 +21,7 @@ public class Line {
                 ||  pawns.stream().allMatch(Pawn::isSquare) || pawns.stream().allMatch(Pawn::isRound) );
     }
 
+    public Pawn get(int i) {
+        return pawns.get( i );
+    }
 }
